@@ -37,7 +37,6 @@ const Navbar = () => {
         {Object.entries(request).map(([key, { title, url }]) => {
           return (
             <Link
-              onClick={() => router.push(`/?genre=${key}`)}
               href={`/?genre=${key}`}
               key={key}
             >
