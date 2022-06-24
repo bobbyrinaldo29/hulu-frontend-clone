@@ -1,15 +1,14 @@
 import { ThumbUpIcon } from "@heroicons/react/solid";
 import Image from "next/image";
+import { forwardRef } from "react";
 
-const Thumbnail = ({ result }) => {
+const Thumbnail = ({ result }, ref) => {
   const TMDB_URL = `https://image.tmdb.org/t/p/original/${
     result.backdrop_path || result.poster_path
   }`;
 
-  console.log(result);
-
   return (
-    <div className="p-2 transition duration-200 ease-in-out transform cursor-pointer group sm:hover:scale-105 hover:z-50">
+    <div ref={ref} className="p-2 transition duration-200 ease-in-out transform cursor-pointer group sm:hover:scale-105 hover:z-50">
       <Image
         src={TMDB_URL}
         alt="image"
@@ -23,7 +22,7 @@ const Thumbnail = ({ result }) => {
           {result.title || result.original_name}
         </h2>
         <p className="flex items-center opacity-0 group-hover:opacity-100">
-          {`${result.media_type} •`}{" "}
+          {`${result.media_type || result.original_language} •`}{" "}
           {`${result.release_date || result.first_air_date} •`}{" "}
           <ThumbUpIcon className="h-5 mx-2" />
           {result.vote_count}
@@ -33,4 +32,4 @@ const Thumbnail = ({ result }) => {
   );
 };
 
-export default Thumbnail;
+export default forwardRef(Thumbnail);
