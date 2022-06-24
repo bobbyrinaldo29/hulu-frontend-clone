@@ -1,8 +1,10 @@
 import Head from "next/head";
+import Content from "../components/Content/Content";
 import Header from "../components/Header/Header";
 import Navbar from "../components/Navbar/Navbar";
+import request from "../utils/request";
 
-export default function Home() {
+export default function Home({results}) {
   return (
     <>
       <Head>
@@ -10,11 +12,30 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Header */}
-      <Header />
-
-      {/* Navbar */}
-      <Navbar />
+      <div className="mx-auto 2xl:container">
+        {/* Header */}
+        <Header />
+        {/* Navbar */}
+        <Navbar />
+        {/* Result */}
+        <Content results={results}/>
+      </div>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const genre = context;
+
+  const reqData = await fetch(
+    `https://api.themoviedb.org/3${
+      request[genre]?.url || request.fetchTrending.url
+    }`
+  ).then(res => res.json());
+
+  return {
+    props : {
+      results: reqData.results
+    }
+  }
 }
