@@ -4,6 +4,22 @@ import Header from "../components/Header/Header";
 import Navbar from "../components/Navbar/Navbar";
 import request from "../utils/request";
 
+export async function getServerSideProps(context) {
+  const genre = context.query.genre;
+
+  const reqData = await fetch(
+    `https://api.themoviedb.org/3${
+      request[genre]?.url || request.fetchTrending.url
+    }`
+  ).then(res => res.json());
+
+  return {
+    props : {
+      results: reqData.results
+    }
+  }
+}
+
 export default function Home({results}) {
   return (
     <>
@@ -22,20 +38,4 @@ export default function Home({results}) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  const genre = context.query.genre;
-
-  const reqData = await fetch(
-    `https://api.themoviedb.org/3${
-      request[genre]?.url || request.fetchTrending.url
-    }`
-  ).then(res => res.json());
-
-  return {
-    props : {
-      results: reqData.results
-    }
-  }
 }

@@ -12,9 +12,10 @@ const Thumbnail = ({ result }, ref) => {
       <Image
         src={TMDB_URL}
         alt="image"
-        width={1280}
-        height={800}
+        width={720}
+        height={470}
         layout="responsive"
+        loading="eager"
       />
       <div className="p-2">
         <p className="truncate">{result.overview}</p>
