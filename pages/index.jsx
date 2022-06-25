@@ -5,22 +5,23 @@ import Navbar from "../components/Navbar/Navbar";
 import request from "../utils/request";
 
 export async function getServerSideProps(context) {
-  const genre = context.query.genre;
+  const genre = context.query.genre; // get query
 
+  // Fetch data from query
   const reqData = await fetch(
     `https://api.themoviedb.org/3${
-      request[genre]?.url || request.fetchTrending.url
+      request[genre]?.url || request.fetchTrending.url // if genre doesn't work will fetch trending
     }`
-  ).then(res => res.json());
+  ).then((res) => res.json()); // convert to json
 
   return {
-    props : {
-      results: reqData.results
-    }
-  }
+    props: {
+      results: reqData.results, // send file to props
+    },
+  };
 }
 
-export default function Home({results}) {
+export default function Home({ results }) {
   return (
     <>
       <Head>
@@ -34,7 +35,7 @@ export default function Home({results}) {
         {/* Navbar */}
         <Navbar />
         {/* Result */}
-        <Content results={results}/>
+        <Content results={results} />
       </div>
     </>
   );
