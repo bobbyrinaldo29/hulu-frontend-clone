@@ -3,7 +3,7 @@ import Image from "next/image";
 import { forwardRef } from "react";
 
 const Thumbnail = ({ result }, ref) => {
-  const TMDB_URL = `https://image.tmdb.org/t/p/w500/${
+  const TMDB_URL = `https://image.tmdb.org/t/p/w200/${
     result.backdrop_path || result.poster_path
   }`;
 
