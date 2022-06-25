@@ -15,7 +15,6 @@ const Thumbnail = ({ result }, ref) => {
         width={720}
         height={470}
         layout="responsive"
-        loading="eager"
       />
       <div className="p-2">
         <p className="truncate">{result.overview}</p>
