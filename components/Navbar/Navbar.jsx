@@ -25,7 +25,6 @@ function useHorizontalScroll() {
 
 const Navbar = () => {
   const scrollRef = useHorizontalScroll();
-  const router = useRouter();
 
   return (
     <nav className="relative">
@@ -37,7 +36,7 @@ const Navbar = () => {
         {Object.entries(request).map(([key, { title, url }]) => {
           return (
             <Link href={`/?genre=${key}`} key={key}>
-              <a className="transition duration-100 transform cursor-pointer hover:scale-125 last:pr-24 first:pl-24 hover:text-white active:text-red-500">
+              <a className="transition duration-100 transform cursor-pointer hover:scale-125 last:pr-5 first:pl-5 hover:text-white active:text-red-500">
                 {title}
               </a>
             </Link>
